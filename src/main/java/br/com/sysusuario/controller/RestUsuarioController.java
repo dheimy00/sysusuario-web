@@ -53,11 +53,11 @@ public class RestUsuarioController {
 	  //-------------------Create a User--------------------------------------------------------
 	     
 	    @RequestMapping(value = "/usuario/", method = RequestMethod.POST)
-	    public ResponseEntity<Void> createUser(@RequestBody Usuario user,    UriComponentsBuilder ucBuilder) {
-	        System.out.println("Creating User " + user.getNome());
+	    public ResponseEntity<Void> salvarUsuario(@RequestBody Usuario user,    UriComponentsBuilder ucBuilder) {
+	        System.out.println("Salvando usuario " + user.getNome());
 	 
 	        if (usuarioService.isUsuarioExiste(user)) {
-	            System.out.println("A User with name " + user.getNome() + " already exist");
+	            System.out.println("Um usuário com nome " + user.getNome() + " já existe");
 	            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
 	        }
 	 
@@ -70,33 +70,33 @@ public class RestUsuarioController {
 	    //------------------- Update a User --------------------------------------------------------
 	     
 	    @RequestMapping(value = "/usuario/{id}", method = RequestMethod.PUT)
-	    public ResponseEntity<Usuario> updateUser(@PathVariable("id") int id, @RequestBody Usuario user) {
-	        System.out.println("Updating User " + id);
+	    public ResponseEntity<Usuario> atualizarUsuario(@PathVariable("id") int id, @RequestBody Usuario user) {
+	        System.out.println("Atualizando usuário " + id);
 	         
-	        Usuario currentUser = usuarioService.getUser(id);
+	        Usuario usuarioID = usuarioService.getUser(id);
 	         
-	        if (currentUser==null) {
-	            System.out.println("User with id " + id + " not found");
+	        if (usuarioID==null) {
+	            System.out.println("Usuário com id " + id + " não encontrado");
 	            return new ResponseEntity<Usuario>(HttpStatus.NOT_FOUND);
 	        }
 	 
-	        currentUser.setNome(user.getNome());
-	        currentUser.setCpf(user.getCpf());
-	        currentUser.setIdade(user.getIdade());
+	        usuarioID.setNome(user.getNome());
+	        usuarioID.setCpf(user.getCpf());
+	        usuarioID.setIdade(user.getIdade());
 	         
-	        usuarioService.alterar(currentUser);
-	        return new ResponseEntity<Usuario>(currentUser, HttpStatus.OK);
+	        usuarioService.alterar(usuarioID);
+	        return new ResponseEntity<Usuario>(usuarioID, HttpStatus.OK);
 	    }
 	    
 	    //------------------- Delete a User --------------------------------------------------------
 	     
 	    @RequestMapping(value = "/usuario/{id}", method = RequestMethod.DELETE)
-	    public ResponseEntity<Usuario> deleteUser(@PathVariable("id") int id) {
-	        System.out.println("Fetching & Deleting User with id " + id);
+	    public ResponseEntity<Usuario> exlcuirUsuario(@PathVariable("id") int id) {
+	        System.out.println("Excluindo Usuário com ID " + id);
 	 
 	        Usuario user = usuarioService.getUser(id);
 	        if (user == null) {
-	            System.out.println("Unable to delete. User with id " + id + " not found");
+	            System.out.println("Não é possível excluir. Usuario com id " + id + " não encontrado");
 	            return new ResponseEntity<Usuario>(HttpStatus.NOT_FOUND);
 	        }
 	 
