@@ -14,43 +14,43 @@ public class UsuarioTest {
    
 
     /* GET */
-	 private static void getUser(){
-        System.out.println("Testing getUser API----------");
+	 private static void getUsuario(){
+        System.out.println("Teste getUsuario API----------");
         RestTemplate restTemplate = new RestTemplate();
-        Usuario user = restTemplate.getForObject(REST_SERVICE_URI+"/usuario/2", Usuario.class);      
-        System.out.println(user.toString());
+        Usuario usuario = restTemplate.getForObject(REST_SERVICE_URI+"/usuario/2", Usuario.class);      
+        System.out.println(usuario.toString());
     }
     
     
     
     /* POST */
-    private static void createUser() {
-        System.out.println("Testing create User API----------");
+    private static void salvarUsuario() {
+        System.out.println("Teste salvar usuario API----------");
         RestTemplate restTemplate = new RestTemplate();
-        Usuario user = new Usuario(5,"Sarah","3423114231","10");
-        URI uri = restTemplate.postForLocation(REST_SERVICE_URI+"/usuario/", user, Usuario.class);
+        Usuario usuario = new Usuario(5,"Sarah","3423114231","10");
+        URI uri = restTemplate.postForLocation(REST_SERVICE_URI+"/usuario/", usuario, Usuario.class);
         System.out.println("Location : "+uri.toASCIIString());
     }
     
     /* PUT */
-    private static void updateUser() {
-        System.out.println("Testing update User API----------");
+    private static void atualizarUsuario() {
+        System.out.println("Teste atualiza  usuario API----------");
         RestTemplate restTemplate = new RestTemplate();
-        Usuario user  = new Usuario(2,"Tomy","3423114231", "7");
-        restTemplate.put(REST_SERVICE_URI+"/usuario/3", user);
-        System.out.println(user.toString());
+        Usuario usuario  = new Usuario(2,"Tomy","3423114231", "7");
+        restTemplate.put(REST_SERVICE_URI+"/usuario/3", usuario);
+        System.out.println(usuario.toString());
     }
     
     /* DELETE */
-    private static void deleteUser() {
-        System.out.println("Testing delete User API----------");
+    private static void excluirUsuario() {
+        System.out.println("Teste excluir usuario API----------");
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.delete(REST_SERVICE_URI+"/usuario/3");
     }
     
     /* GET */
     @SuppressWarnings("unchecked")
-    private static void listAllUsers(){
+    private static void listaUsuarios(){
         System.out.println("Testing listAllUsers API-----------");
          
         RestTemplate restTemplate = new RestTemplate();
@@ -61,12 +61,12 @@ public class UsuarioTest {
                 System.out.println("Usuario : Nome="+map.get("nome")+", CPF="+map.get("cpf")+", Idade="+map.get("idade"));
             }
         }else{
-            System.out.println("No user exist----------");
+            System.out.println("Não existe usuario----------");
         }
     }
     
     
 	 public static void main(String args[]){
-		 createUser();	      	 
+  	 
 	 }
 }
