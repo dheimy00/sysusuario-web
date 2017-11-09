@@ -2,12 +2,15 @@ package br.com.sysusuario.modelo;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name="usuario")
@@ -17,8 +20,8 @@ public class Usuario implements Serializable{
 
 	@Id
 	@Column(name="id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	
 	@Column(name="Nome",nullable = false,length= 50)
 	private String nome;
@@ -26,37 +29,21 @@ public class Usuario implements Serializable{
 	@Column(name="CPF",nullable = false,length= 50)
 	private String cpf;
 	
-	@Column(name="Idade",nullable = false,length= 50)
-	private String idade;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Contato contato;
 	
-//	private Endereco endereco;
-//	
-//	private Contato contato;
-//	
-//	private EnumSexo enumSexo;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Endereco endereco;
+	
 	
 	public Usuario(){}
 	
-	
-   public Usuario(String nome, String cpf, String idade){
-	this.nome = nome;
-	this.cpf = cpf;
-	this.idade = idade;
-}
-		
-	public Usuario(int id,String nome, String cpf, String idade) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.cpf = cpf;
-		this.idade = idade;
-	}
-		
-	public int getId() {
+			
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -76,42 +63,24 @@ public class Usuario implements Serializable{
 		this.cpf = cpf;
 	}
 
-	public String getIdade() {
-		return idade;
-	}
 
-	public void setIdade(String idade) {
-		this.idade = idade;
+	public Contato getContato() {
+		return contato;
 	}
 
 
-	@Override
-	public String toString() {
-		return "Usuario [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", idade=" + idade + "]";
+	public void setContato(Contato contato) {
+		this.contato = contato;
 	}
 
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
-		return result;
+	public Endereco getEndereco() {
+		return endereco;
 	}
 
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Usuario other = (Usuario) obj;
-		if (id != other.id)
-			return false;
-		return true;
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 	
 	

@@ -1,19 +1,35 @@
 package br.com.sysusuario.modelo;
 
-public class Contato {
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="contato")
+public class Contato implements Serializable {	
 	
+	private static final long serialVersionUID = -6586990542141552158L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
+	
+	@Column(nullable=false,length=14)
 	private String telefone;
+	
+	@Column(nullable=false,length=14)
 	private String celular;
+	
+	@Column(nullable=false,length=14)
 	private String email;
 	
 	public Contato(){}
 	
-	public Contato(String telefone, String celular, String email) {
-		super();
-		this.telefone = telefone;
-		this.celular = celular;
-		this.email = email;
-	}
 	public String getTelefone() {
 		return telefone;
 	}

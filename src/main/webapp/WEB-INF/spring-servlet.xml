@@ -10,15 +10,17 @@
  
     <!-- Specifying base package of the Components like Controller, Service,
         DAO -->
-    <context:component-scan base-package="br.com.sysusuario" />
+    <context:component-scan base-package="br.com.sysusuario.*" />
  
     <!-- Getting Database properties -->
     <context:property-placeholder location="classpath:application.properties" />
  
     <mvc:annotation-driven />
+    
+    <mvc:default-servlet-handler/>
  
     <!-- Specifying the Resource location to load JS, CSS, Images etc -->
-    <mvc:resources mapping="/resources/**" location="/resources/" />
+    <mvc:resources mapping="/static/**" location="/static/" />
  
     <!-- View Resolver -->
     <bean
